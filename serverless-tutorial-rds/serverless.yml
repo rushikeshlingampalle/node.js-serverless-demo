@@ -1,0 +1,24 @@
+service: serverless-tutorial-rds
+app: server-app
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+
+functions:
+
+  app-api:
+    handler: handler.handler
+    events:
+      - http:
+          path: /
+          method: get
+          cors: true
+      - http:
+          path: /{proxy+}
+          method: any
+          cors: true 
+plugins:
+  - serverless-offline
